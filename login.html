@@ -50,6 +50,7 @@
             color: #80CFFF;
         }
     </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <h1>Login</h1>
@@ -58,6 +59,8 @@
         <input type="text" id="user" name="user" required><br><br>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
+        <!-- reCAPTCHA widget -->
+        <div class="g-recaptcha" data-sitekey="6Lc5sZsqAAAAAAKa1wJY_gWyEt1GFwEDsYKnOKxN"></div><br>
         <input type="submit" value="Login">
         <p>Don't have an account? <a href="register.html">Register</a></p>
     </form>
@@ -88,6 +91,13 @@
             const username = document.getElementById("user").value;
             const password = document.getElementById("password").value;
 
+            // Check if reCAPTCHA is completed
+            if (grecaptcha.getResponse() === "") {
+                alert("Please complete the reCAPTCHA.");
+                return;
+            }
+
+            // Simulate login process
             if (localStorage.getItem(username) === password) {
                 alert("Login successful! Redirecting...");
                 window.location.href = "user.html";
